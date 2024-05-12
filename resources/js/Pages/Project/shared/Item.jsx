@@ -1,9 +1,10 @@
+import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
 import { Link } from "@inertiajs/react";
 import React from "react";
 
 const Item = ({ project }) => {
     return (
-        <tr>
+        <tr className="py-4">
             <td className="px-3 py-2">{project.id}</td>
             <td className="px-3 py-2">
                 <img
@@ -13,7 +14,16 @@ const Item = ({ project }) => {
                 />
             </td>
             <td className="px-3 py-2">{project.name}</td>
-            <td className="px-3 py-2">{project.status}</td>
+            <td className="px-3 py-2 ">
+                <span
+                    className={
+                        "px-3 py-2 rounded-md " +
+                        (PROJECT_STATUS_CLASS_MAP[project.status] || "")
+                    }
+                >
+                    {PROJECT_STATUS_TEXT_MAP[project.status]}
+                </span>
+            </td>
             <td className="px-3 py-2">{project.created_at}</td>
             <td className="px-3 py-2">{project.due_date}</td>
             <td className="px-3 py-2">{project.created_by.name}</td>

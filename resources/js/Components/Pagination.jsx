@@ -6,6 +6,7 @@ const Pagination = ({ links }) => {
         <nav className="text-center mt-4">
             {links.map((link) => (
                 <Link
+                    preserveScroll
                     href={link.url || ""}
                     key={link.label}
                     dangerouslySetInnerHTML={{ __html: link.label }}
