@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/react";
 import List from "./shared/List";
 import Pagination from "@/Components/Pagination";
 
-const index = ({ auth, projects }) => {
+const index = ({ auth, projects, queryParams }) => {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -19,7 +19,10 @@ const index = ({ auth, projects }) => {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
-                            <List projects={projects} />
+                            <List
+                                projects={projects}
+                                queryParams={queryParams}
+                            />
                             <Pagination links={projects.meta.links} />
                         </div>
                     </div>

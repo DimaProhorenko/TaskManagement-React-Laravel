@@ -5,7 +5,9 @@ import React from "react";
 import Item from "./Item";
 
 const List = ({ projects, queryParams = null }) => {
+    console.log("Top", queryParams);
     queryParams = queryParams || {};
+    console.log("Bot", queryParams);
     const handleSearchFieldChange = (name, value) => {
         if (value) {
             queryParams[name] = value;
@@ -44,15 +46,17 @@ const List = ({ projects, queryParams = null }) => {
                         <TextInput
                             placeholder="Project name"
                             className="w-full"
+                            defaultValue={queryParams.name || ""}
                             onBlur={(e) =>
                                 handleSearchFieldChange("name", e.target.value)
                             }
-                            onKeyPressed={(e) => handleKeyPress("name", e)}
+                            onKeyPress={(e) => handleKeyPress("name", e)}
                         />
                     </th>
                     <th className="px-3 py-3">
                         <SelectInput
                             className="w-full"
+                            defaultValue={queryParams.status}
                             onChange={(e) =>
                                 handleSearchFieldChange(
                                     "status",
@@ -60,7 +64,7 @@ const List = ({ projects, queryParams = null }) => {
                                 )
                             }
                         >
-                            <option>Select Status</option>
+                            <option value="Select Status">Select Status</option>
                             <option value={"pending"}>Pending</option>
                             <option value="in_progress">In Progress</option>
                             <option value="completed">Completed</option>
