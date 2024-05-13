@@ -5,9 +5,8 @@ import React from "react";
 import Item from "./Item";
 
 const List = ({ projects, queryParams = null }) => {
-    console.log("Top", queryParams);
     queryParams = queryParams || {};
-    console.log("Bot", queryParams);
+
     const handleSearchFieldChange = (name, value) => {
         if (value) {
             queryParams[name] = value;
@@ -24,18 +23,72 @@ const List = ({ projects, queryParams = null }) => {
         }
         handleSearchFieldChange(name, e.target.value);
     };
+
+    const handleSortChanged = (fieldName) => {
+        if (fieldName === queryParams.sortField) {
+            if (queryParams.sortDirection === "desc") {
+                queryParams.sortDirection = "asc";
+            } else {
+                queryParams.sortDirection = "desc";
+            }
+        } else {
+            queryParams.sortField = fieldName;
+            queryParams.sortDirection = "desc";
+        }
+        router.get(route("project.index", queryParams));
+    };
     return (
         <table className="table-auto">
             <thead className="border-b border-slate-200 bg-slate-700">
                 <tr className="text-nowrap">
-                    <th className="px-3 py-3">ID</th>
-                    <th className="px-3 py-3">Image</th>
-                    <th className="px-3 py-3">Name</th>
-                    <th className="px-3 py-3">Status</th>
-                    <th className="px-3 py-3">Create Date</th>
-                    <th className="px-3 py-3">Due Date</th>
-                    <th className="px-3 py-3">Created By</th>
-                    <th className="px-3 py-3">Actions</th>
+                    <th
+                        onClick={(e) => handleSortChanged("id")}
+                        className="px-3 py-3 cursor-pointer hover:underline"
+                    >
+                        ID
+                    </th>
+                    <th
+                        onClick={(e) => handleSortChanged("image_path")}
+                        className="px-3 py-3 cursor-pointer hover:underline"
+                    >
+                        Image
+                    </th>
+                    <th
+                        onClick={(e) => handleSortChanged("name")}
+                        className="px-3 py-3 cursor-pointer hover:underline"
+                    >
+                        Name
+                    </th>
+                    <th
+                        onClick={(e) => handleSortChanged("status")}
+                        className="px-3 py-3 cursor-pointer hover:underline"
+                    >
+                        Status
+                    </th>
+                    <th
+                        onClick={(e) => handleSortChanged("created_at")}
+                        className="px-3 py-3 cursor-pointer hover:underline"
+                    >
+                        Create Date
+                    </th>
+                    <th
+                        onClick={(e) => handleSortChanged("due_date")}
+                        className="px-3 py-3 cursor-pointer hover:underline"
+                    >
+                        Due Date
+                    </th>
+                    <th
+                        onClick={(e) => handleSortChanged("created_by")}
+                        className="px-3 py-3 cursor-pointer hover:underline"
+                    >
+                        Created By
+                    </th>
+                    <th
+                        onClick={(e) => handleSortChanged("")}
+                        className="px-3 py-3 cursor-pointer hover:underline"
+                    >
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <thead className="border-b border-slate-200 bg-slate-700">
@@ -64,7 +117,7 @@ const List = ({ projects, queryParams = null }) => {
                                 )
                             }
                         >
-                            <option value="Select Status">Select Status</option>
+                            <option>Select Status</option>
                             <option value={"pending"}>Pending</option>
                             <option value="in_progress">In Progress</option>
                             <option value="completed">Completed</option>
