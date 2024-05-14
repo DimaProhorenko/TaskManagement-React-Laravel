@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+require_once __DIR__ . '/../helpers/utils.php';
+
+
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Resources\TaskResource;
 use App\Models\Task;
+use Inertia\Inertia;
 
 class TaskController extends Controller
 {
@@ -13,7 +18,11 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = sortQueryModel(Task::query());
+        return Inertia::render('Task/index', [
+            'tasks' => TaskResource::collection($tasks),
+            'queryParams' => request()->query() ?: null
+        ]);
     }
 
     /**
