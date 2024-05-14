@@ -9,8 +9,6 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Project;
-use App\Models\Task;
-use App\Models\User;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -58,7 +56,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $query = Task::query()->where('project_id', $project->id);
+        $query = $project->tasks();
         $tasks = sortQueryModel($query);
         return Inertia::render('Project/Show', [
             'project' => (new ProjectResource($project)),

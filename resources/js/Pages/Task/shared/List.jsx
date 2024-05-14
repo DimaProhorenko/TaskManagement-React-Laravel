@@ -6,8 +6,9 @@ import React from "react";
 import Item from "./Item";
 import TableHeading from "@/Components/TableHeading";
 
-const List = ({ tasks, queryParams = null }) => {
+const List = ({ tasks, queryParams = null, showProjectColumn }) => {
     queryParams = queryParams || {};
+    console.log(showProjectColumn);
 
     const handleSearchFieldChange = (name, value) => {
         if (value) {
@@ -53,6 +54,7 @@ const List = ({ tasks, queryParams = null }) => {
                             ID
                         </TableHeading>
                         <th className="px-3 py-3">Image</th>
+                        {showProjectColumn && <th>Project Name</th>}
                         <TableHeading
                             name="name"
                             sortField={queryParams.sortField}
@@ -89,10 +91,11 @@ const List = ({ tasks, queryParams = null }) => {
                         <th className="px-3 py-3">Actions</th>
                     </tr>
                 </thead>
-                <thead className="border-b border-slate-200 bg-slate-700">
+                <thead className="border-b border-slate-200 bg-slate-700 w-full">
                     <tr className="text-nowrap">
                         <th className="px-3 py-3"></th>
                         <th className="px-3 py-3"></th>
+                        {showProjectColumn && <th className="px-3 py-3"></th>}
                         <th className="px-3 py-3">
                             <TextInput
                                 placeholder="Task name"
@@ -132,7 +135,11 @@ const List = ({ tasks, queryParams = null }) => {
                 </thead>
                 <tbody>
                     {tasks.data.map((task) => (
-                        <Item task={task} key={task.id} />
+                        <Item
+                            task={task}
+                            key={task.id}
+                            showProjectColumn={showProjectColumn}
+                        />
                     ))}
                 </tbody>
             </table>

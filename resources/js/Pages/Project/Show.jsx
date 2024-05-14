@@ -95,8 +95,12 @@ const Show = ({ auth, project, tasks, queryParams = null }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
-                        <Table tasks={tasks} queryParams={queryParams} />
+                    <div className="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mt-6">
+                        <Table
+                            tasks={tasks}
+                            queryParams={queryParams}
+                            showProjectColumn={false}
+                        />
                     </div>
                 </div>
             </div>

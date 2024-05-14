@@ -2,7 +2,7 @@ import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from "@/constants";
 import { Link } from "@inertiajs/react";
 import React from "react";
 
-const Item = ({ task }) => {
+const Item = ({ task, showProjectColumn }) => {
     return (
         <tr className="py-4">
             <td className="px-3 py-2">{task.id}</td>
@@ -13,6 +13,9 @@ const Item = ({ task }) => {
                     className="max-w-10"
                 />
             </td>
+            {showProjectColumn && (
+                <td className="px-3 py-2">{task.project.name}</td>
+            )}
             <td className="px-3 py-2">{task.name}</td>
             <td className="px-3 py-2 ">
                 <span
