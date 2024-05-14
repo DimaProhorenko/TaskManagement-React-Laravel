@@ -6,6 +6,7 @@ import TextAreaInput from "../TextAreaInput";
 import TextInput from "../TextInput";
 import SelectInput from "../SelectInput";
 import PrimaryButton from "../PrimaryButton";
+import InputError from "../InputError";
 
 const CreateProjectForm = () => {
     const { data, setData, post, errors } = useForm({
@@ -35,6 +36,7 @@ const CreateProjectForm = () => {
                     value={data.image}
                     onChange={(e) => setData("image", e.target.value)}
                 />
+                <InputError message={errors.image} className="mt-2" />
             </div>
             <div>
                 <InputLabel
@@ -49,6 +51,7 @@ const CreateProjectForm = () => {
                     isFocused={true}
                     onChange={(e) => setData("name", e.target.value)}
                 />
+                <InputError message={errors.name} className="mt-2" />
             </div>
             <div>
                 <InputLabel
@@ -62,6 +65,7 @@ const CreateProjectForm = () => {
                     value={data.description}
                     onChange={(e) => setData("description", e.target.value)}
                 />
+                <InputError message={errors.description} className="mt-2" />
             </div>
             <div>
                 <InputLabel
@@ -76,6 +80,7 @@ const CreateProjectForm = () => {
                     placeholder="mm/dd/yyyy"
                     onChange={(e) => setData("due_date", e.target.value)}
                 />
+                <InputError message={errors.due_date} className="mt-2" />
             </div>
             <div>
                 <InputLabel
@@ -85,22 +90,25 @@ const CreateProjectForm = () => {
                 />
                 <SelectInput
                     className="w-full"
-                    onChange={(e) => setData("status", e.taget.value)}
+                    onChange={(e) => setData("status", e.target.value)}
                 >
                     <option>Select Status</option>
                     <option value="pending">Pending</option>
                     <option value="in_progress">In Progress</option>
                     <option value="completed">Completed</option>
                 </SelectInput>
+                <InputError message={errors.status} className="mt-2" />
             </div>
             <div className="flex gap-4 justify-end">
                 <Link
                     href={route("project.index")}
-                    className="inline-block px-4 py-2 bg-red-500 text-white rounded-lg"
+                    className="block px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 text-base"
                 >
                     Back
                 </Link>
-                <PrimaryButton className="!text-sm">Create</PrimaryButton>
+                <PrimaryButton className="!text-sm !capitalize">
+                    Create
+                </PrimaryButton>
             </div>
         </form>
     );
