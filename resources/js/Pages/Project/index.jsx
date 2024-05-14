@@ -1,6 +1,6 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import List from "./shared/List";
 import Pagination from "@/Components/Pagination";
 
@@ -9,9 +9,17 @@ const index = ({ auth, projects, queryParams }) => {
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Projects
-                </h2>
+                <div className="flex gap-4 items-center justify-between">
+                    <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        Projects
+                    </h2>
+                    <Link
+                        href={route("project.create")}
+                        className="bg-emerald-500 text-white px-4 py-2 rounded-full text-sm cursor-pointer hover:bg-emerald-700 transition-colors"
+                    >
+                        Add New
+                    </Link>
+                </div>
             }
         >
             <Head title="Projects" />
