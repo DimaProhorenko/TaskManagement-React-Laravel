@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use App\Models\User;
+use Inertia\Inertia;
 
 class ProjectController extends Controller
 {
@@ -53,7 +54,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return Inertia::render('Project/Show', [
+            'project' => (new ProjectResource($project))
+        ]);
     }
 
     /**

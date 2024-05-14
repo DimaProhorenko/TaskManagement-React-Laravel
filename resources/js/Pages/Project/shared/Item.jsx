@@ -13,7 +13,14 @@ const Item = ({ project }) => {
                     className="max-w-10"
                 />
             </td>
-            <td className="px-3 py-2">{project.name}</td>
+            <td className="px-3 py-2">
+                <Link
+                    href={route("project.show", project.id)}
+                    className="hover:underline"
+                >
+                    {project.name}
+                </Link>
+            </td>
             <td className="px-3 py-2 ">
                 <span
                     className={
