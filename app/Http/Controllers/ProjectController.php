@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+require_once __DIR__ . '/../helpers/utils.php';
+
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\TaskResource;
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
 use Inertia\Inertia;
 
@@ -54,8 +58,12 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $query = Task::query()->where('project_id', $project->id);
+        $tasks = sortQueryModel($query);
         return Inertia::render('Project/Show', [
-            'project' => (new ProjectResource($project))
+            'project' => (new ProjectResource($project)),
+            'tasks' => TaskResource::collection($tasks),
+            'queryParams' => request()->query() ?: null
         ]);
     }
 

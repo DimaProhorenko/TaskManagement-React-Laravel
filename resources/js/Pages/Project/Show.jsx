@@ -2,9 +2,10 @@ import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import React from "react";
+import Table from "../Task/shared/Table";
 
-const Show = ({ auth, project }) => {
-    console.log(project);
+const Show = ({ auth, project, tasks, queryParams = null }) => {
+    queryParams = queryParams || {};
     return (
         <Authenticated
             user={auth.user}
@@ -18,13 +19,13 @@ const Show = ({ auth, project }) => {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div>
+                            <img
+                                src={project.image_path}
+                                className="w-full max-h-72 object-cover"
+                            />
+                        </div>
                         <div className="p-6 text-gray-900 dark:text-gray-100">
-                            <div>
-                                <img
-                                    src={project.image_path}
-                                    className="w-full max-h-72 object-cover"
-                                />
-                            </div>
                             <div className="grid gap-3 grid-cols-1 mt-4 sm:grid-cols-2">
                                 <div className="space-y-4">
                                     <div>
@@ -86,7 +87,16 @@ const Show = ({ auth, project }) => {
                                     </div>
                                 </div>
                             </div>
+                            <div className="mt-4">
+                                <h4 className="text-lg font-medium">
+                                    Project Description
+                                </h4>
+                                <p>{project.description}</p>
+                            </div>
                         </div>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
+                        <Table tasks={tasks} queryParams={queryParams} />
                     </div>
                 </div>
             </div>
