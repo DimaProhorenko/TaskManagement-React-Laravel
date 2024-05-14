@@ -10,7 +10,7 @@ import InputError from "../InputError";
 
 const CreateProjectForm = () => {
     const { data, setData, post, errors } = useForm({
-        image: "",
+        image_path: "",
         name: "",
         status: "",
         description: "",
@@ -33,8 +33,8 @@ const CreateProjectForm = () => {
                 <FileInput
                     id="projectImage"
                     name="image"
-                    value={data.image}
-                    onChange={(e) => setData("image", e.target.value)}
+                    value={data.image_path}
+                    onChange={(e) => setData("image_path", e.target.value)}
                 />
                 <InputError message={errors.image} className="mt-2" />
             </div>
@@ -74,10 +74,10 @@ const CreateProjectForm = () => {
                     className="mb-2"
                 />
                 <TextInput
+                    type="date"
                     id="dueDate"
                     name="due_date"
                     value={data.due_date}
-                    placeholder="mm/dd/yyyy"
                     onChange={(e) => setData("due_date", e.target.value)}
                 />
                 <InputError message={errors.due_date} className="mt-2" />

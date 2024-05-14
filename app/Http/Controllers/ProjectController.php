@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Project;
+use DateTime;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -48,7 +49,14 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        dd($request->validated());
+        $data = $request->validated();
+
+        $project = new Project($data);
+        $project->updated_by = auth()->id();
+        $project->created_by = auth()->id();
+        $project->save();
+
+        return to_route('project.index');
     }
 
     /**
