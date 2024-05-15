@@ -16,7 +16,7 @@ const TableHeading = ({
         >
             {!sortable && children}
             {sortable && (
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                     <span>{children}</span>
                     <div className="text-slate-400">
                         <ChevronUpIcon

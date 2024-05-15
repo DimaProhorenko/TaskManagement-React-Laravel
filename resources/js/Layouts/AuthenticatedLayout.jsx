@@ -40,6 +40,12 @@ export default function Authenticated({ user, header, children }) {
                                 >
                                     Tasks
                                 </NavLink>
+                                <NavLink
+                                    href={route("user.index")}
+                                    active={route().current("user.index")}
+                                >
+                                    Users
+                                </NavLink>
                             </div>
                         </div>
 
