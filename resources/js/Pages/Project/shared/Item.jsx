@@ -2,7 +2,7 @@ import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
 import { Link } from "@inertiajs/react";
 import React from "react";
 
-const Item = ({ project }) => {
+const Item = ({ project, onDelete }) => {
     return (
         <tr className="py-4">
             <td className="px-3 py-2">{project.id}</td>
@@ -41,12 +41,12 @@ const Item = ({ project }) => {
                 >
                     Edit
                 </Link>
-                <Link
-                    href={route("project.destroy", project.id)}
+                <button
                     className="font-medium text-red-600 hover:underline hover:red-blue-500"
+                    onClick={() => onDelete(project.id)}
                 >
                     Delete
-                </Link>
+                </button>
             </td>
         </tr>
     );

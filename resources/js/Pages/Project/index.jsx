@@ -1,10 +1,16 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import List from "./shared/List";
 import Pagination from "@/Components/Pagination";
 
 const index = ({ auth, projects, queryParams }) => {
+    const handleProjectDelete = (id) => {
+        if (!window.confirm("Are you sure you want to delete the project?")) {
+            return;
+        }
+        router.delete(route("project.destroy", id));
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -30,6 +36,7 @@ const index = ({ auth, projects, queryParams }) => {
                             <List
                                 projects={projects}
                                 queryParams={queryParams}
+                                onProjectDelete={handleProjectDelete}
                             />
                             <Pagination links={projects.meta.links} />
                         </div>

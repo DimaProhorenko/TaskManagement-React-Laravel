@@ -6,6 +6,7 @@ import Table from "../Task/shared/Table";
 
 const Show = ({ auth, project, tasks, queryParams = null }) => {
     queryParams = queryParams || {};
+    console.log("Tasks", tasks);
     return (
         <Authenticated
             user={auth.user}
@@ -22,7 +23,7 @@ const Show = ({ auth, project, tasks, queryParams = null }) => {
                         <div>
                             <img
                                 src={project.image_path}
-                                className="w-full max-h-72 object-cover"
+                                className="w-full max-h-96 object-cover"
                             />
                         </div>
                         <div className="p-6 text-gray-900 dark:text-gray-100">
@@ -96,11 +97,17 @@ const Show = ({ auth, project, tasks, queryParams = null }) => {
                         </div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mt-6">
-                        <Table
-                            tasks={tasks}
-                            queryParams={queryParams}
-                            showProjectColumn={false}
-                        />
+                        {tasks.data.length > 0 ? (
+                            <Table
+                                tasks={tasks}
+                                queryParams={queryParams}
+                                showProjectColumn={false}
+                            />
+                        ) : (
+                            <h2 className="text-white text-center p-4 text-lg font-medium">
+                                No tasks assigned
+                            </h2>
+                        )}
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@ import React from "react";
 import Item from "./Item";
 import TableHeading from "@/Components/TableHeading";
 
-const List = ({ projects, queryParams = null }) => {
+const List = ({ projects, queryParams = null, onProjectDelete }) => {
     queryParams = queryParams || {};
 
     const handleSearchFieldChange = (name, value) => {
@@ -132,7 +132,11 @@ const List = ({ projects, queryParams = null }) => {
                 </thead>
                 <tbody>
                     {projects.data.map((project) => (
-                        <Item project={project} key={project.id} />
+                        <Item
+                            project={project}
+                            key={project.id}
+                            onDelete={onProjectDelete}
+                        />
                     ))}
                 </tbody>
             </table>
