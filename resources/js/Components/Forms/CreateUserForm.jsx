@@ -17,7 +17,7 @@ const CreateProjectForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        post(route("project.store"));
+        post(route("user.store"));
     };
     return (
         <form
