@@ -9,8 +9,8 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Project;
-use DateTime;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -50,6 +50,12 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
+
+        $image = $data['image_path'] ?? null;
+
+        if ($image) {
+            $data['image_path'] = $image->store('project/' . Str::random(10), 'public');
+        }
 
         $project = new Project($data);
         $project->updated_by = auth()->id();

@@ -30,12 +30,14 @@ const CreateProjectForm = () => {
                     value="Project Image"
                     className="mb-3"
                 />
-                <FileInput
+                <TextInput
                     id="projectImage"
-                    name="image"
-                    value={data.image_path}
-                    onChange={(e) => setData("image_path", e.target.value)}
+                    name="image_path"
+                    type="file"
+                    onChange={(e) => setData("image_path", e.target.files[0])}
+                    className="py-3"
                 />
+
                 <InputError message={errors.image} className="mt-2" />
             </div>
             <div>

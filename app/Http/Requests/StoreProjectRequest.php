@@ -23,7 +23,7 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => ['nullable', 'image'],
+            'image_path' => ['nullable', 'image'],
             'name' => ['required', 'max:255'],
             'description' => ['required', 'string'],
             'due_date' => ['nullable', 'date'],
